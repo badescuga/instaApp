@@ -11,22 +11,23 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
-var storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './uploads');
-    },
-    filename: function (req, file, callback) {
-        //     callback(null, file.fieldname + '-' + Date.now());
-        callback(null, file.fieldname + '-' + uuid.v1()); // setting the name to a time-based guid
-    }
-});
-var upload = multer({ storage: storage }).single('bankingData');
-
 app.use(express.static(__dirname + '/public'));
 
  app.get('/', function (req, res) {
      res.sendFile(__dirname + "/index.html");
  });
+ 
+ 
+// var storage = multer.diskStorage({
+//     destination: function (req, file, callback) {
+//         callback(null, './uploads');
+//     },
+//     filename: function (req, file, callback) {
+//         //     callback(null, file.fieldname + '-' + Date.now());
+//         callback(null, file.fieldname + '-' + uuid.v1()); // setting the name to a time-based guid
+//     }
+// });
+// var upload = multer({ storage: storage }).single('bankingData');
 
 // app.post('/api/uploadData', function (req, res) {
 
