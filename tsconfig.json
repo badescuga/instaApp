@@ -8,7 +8,6 @@
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        "outFile": "./public/js/index.js",
         "sourceMap": true
     },
     "filesGlob": [
@@ -17,7 +16,7 @@
         "!node_modules/**"
     ],
     "files": [
-        "./public/js/index.ts"
+        "./public/js/index.tsx"
     ],
     "exclude": []
 }
