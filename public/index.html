@@ -3,12 +3,15 @@
 
 <head>
     <title>InstaApp</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
     <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
     <script>
 
     </script>
@@ -28,14 +31,14 @@
         <div id="mainContainer">
             <!-- main container -- here are going to be all the photos  -->
             <h1>main container</h1>
-            <article>
-                <h1>article 1</h1>
+            <article class="general-card">
+                <p>article 1</p>
             </article>
-            <article>
-                <h1>article 2</h1>
+            <article class="general-card">
+                <p>article 2</p>
             </article>
-            <article>
-                <h1>article 3</h1>
+            <article class="general-card">
+                <p>article 3</p>
             </article>
         </div>
 
@@ -45,6 +48,8 @@
 
         </footer>
     </div>
+        <script type="text/babel" src="js/index.js"></script>
+
 </body>
 
 </html>
