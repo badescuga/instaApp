@@ -13,6 +13,8 @@
     "multer":"*",
     "babel":"5.x",
     "uuid":"*",
-    "circular-json":"*"
+    "circular-json":"*",
+    "react":"*",
+    "typings":"*"
   }
 }
