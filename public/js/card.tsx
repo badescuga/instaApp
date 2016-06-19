@@ -59,6 +59,7 @@ export class Card extends React.Component<CardParams, {}> {
                     <p>Image card</p>
                     <p> {this.props.cardMedia.text} </p>
                     <img src={this.props.cardMedia.imageUrl} />
+                    <br/>
                     <CardButton buttonText="Like" isPressed={this.props.cardDetails.isLikedByMe}/>
                 </div>
             );

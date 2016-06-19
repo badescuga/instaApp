@@ -51,14 +51,14 @@
 	var card_1 = __webpack_require__(3);
 	var card_2 = __webpack_require__(3);
 	var card1 = {
-	    cardType: card_2.CardType.Status,
+	    cardType: card_2.CardType.Image,
 	    cardDetails: {
 	        isLikedByMe: false,
 	        likeCount: 0
 	    },
 	    cardMedia: {
 	        text: "some test text; badescuga",
-	        imageUrl: "www.gsp.ro/1.jpg"
+	        imageUrl: "http://www9.gsp.ro/usr/thumbs/thumb_924_x_600/2016/06/19/738742-rkx1568-lucian-sinmartean.jpg"
 	    }
 	};
 	ReactDOM.render(React.createElement(card_1.Card, {cardType: card1.cardType, cardDetails: card1.cardDetails, cardMedia: card1.cardMedia}), document.getElementById("main"));
@@ -91,7 +91,7 @@
 	var buttons_1 = __webpack_require__(4);
 	(function (CardType) {
 	    CardType[CardType["None"] = 0] = "None";
-	    CardType[CardType["Status"] = 1] = "Status";
+	    CardType[CardType["Text"] = 1] = "Text";
 	    CardType[CardType["Image"] = 2] = "Image";
 	})(exports.CardType || (exports.CardType = {}));
 	var CardType = exports.CardType;
@@ -110,11 +110,11 @@
 	        console.dir(this.props.cardDetails);
 	        console.dir(this.props.cardMedia);
 	        console.dir(this.props.cardType);
-	        if (this.props.cardType === CardType.Status) {
+	        if (this.props.cardType === CardType.Text) {
 	            return (React.createElement("div", null, React.createElement("p", null, "Text card"), React.createElement("p", null, this.props.cardMedia.text), React.createElement(buttons_1.CardButton, {buttonText: "Like", isPressed: this.props.cardDetails.isLikedByMe})));
 	        }
 	        else {
-	            return (React.createElement("div", null, React.createElement("p", null, "Image card"), React.createElement("p", null, " ", this.props.cardMedia.text, " "), React.createElement("img", {src: this.props.cardMedia.imageUrl}), React.createElement(buttons_1.CardButton, {buttonText: "Like", isPressed: this.props.cardDetails.isLikedByMe})));
+	            return (React.createElement("div", null, React.createElement("p", null, "Image card"), React.createElement("p", null, " ", this.props.cardMedia.text, " "), React.createElement("img", {src: this.props.cardMedia.imageUrl}), React.createElement("br", null), React.createElement(buttons_1.CardButton, {buttonText: "Like", isPressed: this.props.cardDetails.isLikedByMe})));
 	        }
 	    };
 	    return Card;

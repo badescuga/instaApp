@@ -8,14 +8,14 @@ import {Card} from "./card";
 import {CardParams, CardType, CardMedia, CardDetails} from "./card";
 
 var card1: CardParams = {
-    cardType: CardType.Text,
+    cardType: CardType.Image,
     cardDetails: {
         isLikedByMe : false,
         likeCount : 0
     },
     cardMedia: {
         text:"some test text; badescuga",
-        imageUrl:"www.gsp.ro/1.jpg"
+        imageUrl:"http://www9.gsp.ro/usr/thumbs/thumb_924_x_600/2016/06/19/738742-rkx1568-lucian-sinmartean.jpg"
     }
 };
 
