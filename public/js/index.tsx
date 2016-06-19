@@ -1,10 +1,12 @@
 /// <reference path="../../typings/index.d.ts" />
+import * as React from "react";
+
 
 interface CardButtonParams extends React.Props<any> {
   buttonText: string;
 }
 
-class CardButton extends Component<CardButtonParams,{}> {
+class CardButton extends React.Component<CardButtonParams,{}> {
     render() {
         return (
            <div>
@@ -14,4 +16,4 @@ class CardButton extends Component<CardButtonParams,{}> {
     }
 };
 
-export default CardButton;
+//export default CardButton;

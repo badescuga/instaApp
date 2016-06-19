@@ -1,22 +1,14 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "isolatedModules": false,
-        "jsx": "react",
+        "outDir": "./public/js/",
+        "sourceMap": true,
         "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "sourceMap": true
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react"
     },
-    "filesGlob": [
-        "**/*.ts",
-        "**/*.tsx",
-        "!node_modules/**"
-    ],
     "files": [
+        "./typings/index.d.ts",
         "./public/js/index.tsx"
-    ],
-    "exclude": []
+    ]
 }
