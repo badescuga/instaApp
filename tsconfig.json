@@ -7,6 +7,7 @@
         "target": "es5",
         "jsx": "react"
     },
+    "compileOnSave": true,
     "files": [
         "./typings/index.d.ts",
         "./public/js/index.tsx"
