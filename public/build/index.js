@@ -52,6 +52,7 @@
 	var card_2 = __webpack_require__(3);
 	var card1 = {
 	    cardType: card_2.CardType.Image,
+	    cardId: "card1234",
 	    cardDetails: {
 	        isLikedByMe: false,
 	        likeCount: 0
@@ -61,7 +62,18 @@
 	        imageUrl: "http://www9.gsp.ro/usr/thumbs/thumb_924_x_600/2016/06/19/738742-rkx1568-lucian-sinmartean.jpg"
 	    }
 	};
-	ReactDOM.render(React.createElement(card_1.Card, {cardType: card1.cardType, cardDetails: card1.cardDetails, cardMedia: card1.cardMedia}), document.getElementById("main"));
+	var card2 = {
+	    cardId: "card35335",
+	    cardType: card_2.CardType.Text,
+	    cardDetails: {
+	        isLikedByMe: true,
+	        likeCount: 1
+	    },
+	    cardMedia: {
+	        text: "some test 2 text"
+	    }
+	};
+	ReactDOM.render(React.createElement("div", null, React.createElement(card_1.Card, {cardId: card1.cardId, cardType: card1.cardType, cardDetails: card1.cardDetails, cardMedia: card1.cardMedia}), React.createElement(card_1.Card, {cardId: card2.cardId, cardType: card2.cardType, cardDetails: card2.cardDetails, cardMedia: card2.cardMedia})), document.getElementById("mainContainer"));
 
 
 /***/ },
@@ -100,21 +112,22 @@
 	    // state: CardParams;
 	    function Card(props) {
 	        _super.call(this, props);
-	        this.props = props;
+	        this.likeButtonClicked = function () {
+	        };
 	        console.log("in card constructor");
-	        console.dir("card type: " + props.cardType);
+	        console.log("card type: " + props.cardType);
 	    }
 	    Card.prototype.componentWillReceiveProps = function (nextProps) {
 	    };
 	    Card.prototype.render = function () {
-	        console.dir(this.props.cardDetails);
-	        console.dir(this.props.cardMedia);
-	        console.dir(this.props.cardType);
+	        // console.dir(this.props.cardDetails);
+	        // console.dir(this.props.cardMedia);
+	        // console.dir(this.props.cardType);
 	        if (this.props.cardType === CardType.Text) {
-	            return (React.createElement("div", null, React.createElement("p", null, "Text card"), React.createElement("p", null, this.props.cardMedia.text), React.createElement(buttons_1.CardButton, {buttonText: "Like", isPressed: this.props.cardDetails.isLikedByMe})));
+	            return (React.createElement("div", {className: "general-card"}, React.createElement("p", null, "Text card. ID: ", this.props.cardId), React.createElement("p", null, this.props.cardMedia.text), React.createElement(buttons_1.CardLikeButton, {buttonText: this.props.cardDetails.isLikedByMe ? "Liked" : "Like", isPressed: this.props.cardDetails.isLikedByMe}), React.createElement("p", null, "Like count: ", this.props.cardDetails.likeCount)));
 	        }
 	        else {
-	            return (React.createElement("div", null, React.createElement("p", null, "Image card"), React.createElement("p", null, " ", this.props.cardMedia.text, " "), React.createElement("img", {src: this.props.cardMedia.imageUrl}), React.createElement("br", null), React.createElement(buttons_1.CardButton, {buttonText: "Like", isPressed: this.props.cardDetails.isLikedByMe})));
+	            return (React.createElement("div", {className: "general-card"}, React.createElement("p", null, "Image card. ID: ", this.props.cardId), React.createElement("p", null, " ", this.props.cardMedia.text, " "), React.createElement("img", {src: this.props.cardMedia.imageUrl}), React.createElement("br", null), React.createElement(buttons_1.CardLikeButton, {buttonText: this.props.cardDetails.isLikedByMe ? "Liked" : "Like", isPressed: this.props.cardDetails.isLikedByMe}), React.createElement("p", null, "Like count: ", this.props.cardDetails.likeCount)));
 	        }
 	    };
 	    return Card;
@@ -134,24 +147,24 @@
 	};
 	/// <reference path="../../typings/index.d.ts" />
 	var React = __webpack_require__(1);
-	var CardButton = (function (_super) {
-	    __extends(CardButton, _super);
-	    function CardButton(props) {
+	var CardLikeButton = (function (_super) {
+	    __extends(CardLikeButton, _super);
+	    function CardLikeButton(props) {
 	        var _this = this;
 	        _super.call(this, props);
 	        this.buttClicked = function () {
 	            console.log(_this.props.buttonText + ' button clicked! status: ' + _this.props.isPressed);
 	        };
 	    }
-	    CardButton.prototype.componentWillMount = function () {
+	    CardLikeButton.prototype.componentWillMount = function () {
 	        console.log('comp will mount');
 	    };
-	    CardButton.prototype.render = function () {
-	        return (React.createElement("button", {onClick: this.buttClicked}, this.props.buttonText));
+	    CardLikeButton.prototype.render = function () {
+	        return (React.createElement("button", {className: "general-button", onClick: this.buttClicked}, this.props.buttonText));
 	    };
-	    return CardButton;
+	    return CardLikeButton;
 	}(React.Component));
-	exports.CardButton = CardButton;
+	exports.CardLikeButton = CardLikeButton;
 	//export default CardLikeButton; 
 
 

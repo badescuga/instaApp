@@ -5,6 +5,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+img {
+  max-width: 100%;
+}
+
 a {
   color: #00B7FF;
 }
@@ -12,6 +16,8 @@ a {
 .general-card {
   box-shadow: 4px 3px 4px 1px #BBBBBB;
   min-height: 30px;
+  min-width: 100px;
+  width:500px;
 /*  background-color: #EEEEEE;*/
   padding: 5px;
   margin:10px 0px 10px 0px;
@@ -19,3 +25,27 @@ border-style: solid;
 border-width:2px;
 border-color: #EEEEEE;
 }
+
+.general-button {
+	-moz-box-shadow:inset -1px -1px 24px -3px #ffffff;
+	-webkit-box-shadow:inset -1px -1px 24px -3px #ffffff;
+	box-shadow:inset -1px -1px 24px -3px #ffffff;
+	background-color:transparent;
+	border:2px solid #29abfc;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 2px 0px #ffffff;
+}
+.general-button:hover {
+	background-color:transparent;
+}
+.general-button:active {
+	position:relative;
+	top:1px;
+}
+

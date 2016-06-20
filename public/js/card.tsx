@@ -1,6 +1,6 @@
 /// <reference path="../../typings/index.d.ts" />
 import * as React from "react";
-import { CardButton } from "./buttons";
+import { CardLikeButton } from "./buttons";
 
 export enum CardType {
     None = 0,
@@ -21,49 +21,56 @@ export interface CardDetails {
 
 export interface CardParams extends React.Props<any> {
     cardType: number;
+    cardId: string;
     cardMedia: CardMedia;
     cardDetails: CardDetails;
 }
 
 export class Card extends React.Component<CardParams, {}> {
 
-   // state: CardParams;
+    // state: CardParams;
 
     constructor(props: CardParams) {
         super(props);
-        this.props = props;
         console.log("in card constructor");
-        console.dir("card type: "+ props.cardType);
+        console.log("card type: " + props.cardType);
     }
 
     componentWillReceiveProps(nextProps: CardParams) {
-    
+
     }
 
     render() {
-        console.dir(this.props.cardDetails);
-        console.dir(this.props.cardMedia);
-        console.dir(this.props.cardType);
+        // console.dir(this.props.cardDetails);
+        // console.dir(this.props.cardMedia);
+        // console.dir(this.props.cardType);
 
         if (this.props.cardType === CardType.Text) { // status card
             return (
-                <div>
-                    <p>Text card</p>
+                <div className="general-card">
+                    <p>Text card. ID: {this.props.cardId}</p>
                     <p>{this.props.cardMedia.text}</p>
-                    <CardButton buttonText="Like" isPressed={this.props.cardDetails.isLikedByMe}/>
+                    <CardLikeButton buttonText={this.props.cardDetails.isLikedByMe ? "Liked" : "Like"} isPressed={this.props.cardDetails.isLikedByMe}/>
+                    <p>Like count: {this.props.cardDetails.likeCount}</p>
                 </div>
             );
         } else { //photo card
             return (
-                <div>
-                    <p>Image card</p>
+                <div className="general-card">
+                    <p>Image card. ID: {this.props.cardId}</p>
                     <p> {this.props.cardMedia.text} </p>
                     <img src={this.props.cardMedia.imageUrl} />
                     <br/>
-                    <CardButton buttonText="Like" isPressed={this.props.cardDetails.isLikedByMe}/>
+                    <CardLikeButton buttonText={this.props.cardDetails.isLikedByMe ? "Liked" : "Like"} isPressed={this.props.cardDetails.isLikedByMe}/>
+                    <p>Like count: {this.props.cardDetails.likeCount}</p>
+
                 </div>
             );
         }
+    }
+
+    likeButtonClicked = () => {
+
     }
 }
 

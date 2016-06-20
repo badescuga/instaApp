@@ -8,7 +8,7 @@ export interface CardButtonParams extends React.Props<any> {
 }
 
 
-export class CardButton extends React.Component<CardButtonParams, {}> {
+export class CardLikeButton extends React.Component<CardButtonParams, {}> {
 
     constructor(props: CardButtonParams) {
         super(props);
@@ -24,7 +24,7 @@ export class CardButton extends React.Component<CardButtonParams, {}> {
 
     render() {
         return (
-            <button onClick={this.buttClicked}>{this.props.buttonText}</button>
+            <button className="general-button" onClick={this.buttClicked}>{this.props.buttonText}</button>
         );
     }
 }
