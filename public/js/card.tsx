@@ -36,11 +36,18 @@ export class Card extends React.Component<CardParams, CardDetails> {
         console.log("in card constructor");
         console.log("card type: " + props.cardType);
 
-        this.state = { // setting state from props in getInitialState is not good practice
-            isLikedByMe: props.cardDetails.isLikedByMe,
-            likeCount: props.cardDetails.likeCount
-        };
+        // this.state = { // setting state from props in getInitialState is not good practice
+        //     isLikedByMe: props.cardDetails.isLikedByMe,
+        //     likeCount: props.cardDetails.likeCount
+        // };
 
+    }
+
+    componentWillMount() {
+        this.setState({
+            isLikedByMe: this.props.cardDetails.isLikedByMe,
+            likeCount: this.props.cardDetails.likeCount
+        });
     }
 
     componentWillReceiveProps(nextProps: CardParams) {

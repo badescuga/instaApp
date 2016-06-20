@@ -59,7 +59,7 @@
 	    },
 	    cardMedia: {
 	        text: "some test text; badescuga",
-	        imageUrl: "http://www9.gsp.ro/usr/thumbs/thumb_924_x_600/2016/06/19/738742-rkx1568-lucian-sinmartean.jpg"
+	        imageUrl: "http://img-9gag-fun.9cache.com/photo/a4j4BAw_700b_v1.jpg"
 	    }
 	};
 	var card2 = {
@@ -133,11 +133,17 @@
 	        };
 	        console.log("in card constructor");
 	        console.log("card type: " + props.cardType);
-	        this.state = {
-	            isLikedByMe: props.cardDetails.isLikedByMe,
-	            likeCount: props.cardDetails.likeCount
-	        };
+	        // this.state = { // setting state from props in getInitialState is not good practice
+	        //     isLikedByMe: props.cardDetails.isLikedByMe,
+	        //     likeCount: props.cardDetails.likeCount
+	        // };
 	    }
+	    Card.prototype.componentWillMount = function () {
+	        this.setState({
+	            isLikedByMe: this.props.cardDetails.isLikedByMe,
+	            likeCount: this.props.cardDetails.likeCount
+	        });
+	    };
 	    Card.prototype.componentWillReceiveProps = function (nextProps) {
 	        this.setState({
 	            isLikedByMe: nextProps.cardDetails.isLikedByMe,

@@ -16,7 +16,7 @@ var card1: CardParams = {
     },
     cardMedia: {
         text: "some test text; badescuga",
-        imageUrl: "http://www9.gsp.ro/usr/thumbs/thumb_924_x_600/2016/06/19/738742-rkx1568-lucian-sinmartean.jpg"
+        imageUrl: "http://img-9gag-fun.9cache.com/photo/a4j4BAw_700b_v1.jpg"
     }
 };
 
