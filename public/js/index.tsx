@@ -12,7 +12,7 @@ var card1: CardParams = {
     cardId: "card1234",
     cardDetails: {
         isLikedByMe: false,
-        likeCount: 0
+        likeCount: 3
     },
     cardMedia: {
         text: "some test text; badescuga",
@@ -32,10 +32,18 @@ var card2: CardParams = {
     }
 };
 
+var cards = [card1, card2];
+
 ReactDOM.render(
     <div>
-        <Card cardId={card1.cardId} cardType={card1.cardType} cardDetails={card1.cardDetails} cardMedia={card1.cardMedia}/>
-        <Card cardId={card2.cardId} cardType={card2.cardType} cardDetails={card2.cardDetails} cardMedia={card2.cardMedia}/>
+
+        {
+            cards.map((item) => {
+                return (
+                    <Card key={item.cardId} cardId={item.cardId} cardType={item.cardType} cardDetails={item.cardDetails} cardMedia={item.cardMedia}/>
+                );
+            })
+        }
     </div>,
     document.getElementById("mainContainer")
 );
