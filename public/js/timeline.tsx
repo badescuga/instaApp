@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import {CardParams, Card} from './card';
+import {CardParams, Card} from './general-card';
 import CardStore = require('./data/cardstore');
 
 interface TimelineProps {

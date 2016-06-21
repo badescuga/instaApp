@@ -129,7 +129,7 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var React = __webpack_require__(1);
-	var card_1 = __webpack_require__(4);
+	var general_card_1 = __webpack_require__(4);
 	var CardStore = __webpack_require__(12);
 	function getCardState() {
 	    return {
@@ -154,7 +154,7 @@
 	    }
 	    Timeline.prototype.render = function () {
 	        return (React.createElement("div", null, this.state.cards.map(function (item) {
-	            return (React.createElement(card_1.Card, {key: item.cardId, cardId: item.cardId, cardType: item.cardType, cardDetails: item.cardDetails, cardMedia: item.cardMedia}));
+	            return (React.createElement(general_card_1.Card, {key: item.cardId, cardId: item.cardId, cardType: item.cardType, cardDetails: item.cardDetails, cardMedia: item.cardMedia}));
 	        })));
 	    };
 	    return Timeline;
@@ -649,10 +649,10 @@
 	var dispatcher_1 = __webpack_require__(7);
 	var constants_1 = __webpack_require__(11);
 	var EventEmitter = __webpack_require__(13);
-	var card_1 = __webpack_require__(4);
+	var general_card_1 = __webpack_require__(4);
 	var CHANGE_EVENT = 'change';
 	var card1 = {
-	    cardType: card_1.CardType.Image,
+	    cardType: general_card_1.CardType.Image,
 	    cardId: "card1234",
 	    cardDetails: {
 	        isLikedByMe: false,
@@ -665,7 +665,7 @@
 	};
 	var card2 = {
 	    cardId: "card35335",
-	    cardType: card_1.CardType.Text,
+	    cardType: general_card_1.CardType.Text,
 	    cardDetails: {
 	        isLikedByMe: true,
 	        likeCount: 1

@@ -3,9 +3,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import {Card} from "./card";
+import {Card} from "./general-card";
 import {Timeline} from "./timeline";
-import {CardParams, CardType, CardMedia, CardDetails} from "./card";
+import {CardParams, CardType, CardMedia, CardDetails} from "./general-card";
 
 // var card1: CardParams = {
 //     cardType: CardType.Image,

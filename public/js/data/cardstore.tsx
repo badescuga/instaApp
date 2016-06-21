@@ -4,7 +4,7 @@ import { AppDispatcher, CardAction } from './dispatcher';
 import { CardActionID } from './constants';
 import assign = require('object-assign');
 import EventEmitter = require('eventemitter3');
-import {CardParams, CardType} from '../card';
+import {CardParams, CardType} from '../general-card';
 
 var CHANGE_EVENT = 'change';
 
