@@ -20,7 +20,8 @@
     "webpack": "*",
     "ts-loader": "*",
     "source-map-loader": "*",
-    "guid":"*"
+    "guid":"*",
+    "blueimp-file-upload-node":"*"
       },
   "devDependencies": {
     "source-map-loader": "^0.1.5",

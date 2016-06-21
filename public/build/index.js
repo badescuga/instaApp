@@ -657,18 +657,64 @@
 	/// <reference path="../../typings/index.d.ts" />
 	var React = __webpack_require__(1);
 	var actions_1 = __webpack_require__(6);
+	var imgurId = "f38d9b7eb2e7c4c";
+	function EL(id) { return document.getElementById(id); } // Get el by ID helper function
+	function readFile(input, callback) {
+	    if (input.files && input.files[0]) {
+	        var FR = new FileReader();
+	        FR.onload = function (e) {
+	            // EL("img").src       = e.target.result;
+	            // EL("b64").innerHTML = e.target.result;
+	            callback(e.target.result);
+	        };
+	        FR.readAsDataURL(input.files[0]);
+	    }
+	}
 	var InputCard = (function (_super) {
 	    __extends(InputCard, _super);
 	    function InputCard(props) {
+	        var _this = this;
 	        _super.call(this, props);
+	        this.resetFields = function (evt) {
+	            // evt.target.parentNode.getElementsByClassName('input-card-text')[0].value = '';
+	        };
 	        this.submitPost = function (evt) {
 	            var text = evt.target.parentNode.getElementsByClassName('input-card-text')[0].value;
-	            var imageUrl = evt.target.parentNode.getElementsByClassName('input-card-image-url')[0].value;
-	            actions_1.CardActions.addNewCardPost(text, imageUrl);
+	            //var imageUrl = evt.target.parentNode.getElementsByClassName('input-card-image-url')[0].value;
+	            var image = evt.target.parentNode.getElementsByClassName('input-card-image')[0];
+	            if (image.files.length > 0) {
+	                console.log(" image card");
+	                readFile(image, function (base64Data) {
+	                    base64Data = base64Data.substr(23); //removing "data:image/jpeg;base64," 
+	                    $.ajax({
+	                        url: 'https://api.imgur.com/3/upload',
+	                        type: 'POST',
+	                        headers: {
+	                            Authorization: 'Client-ID ' + imgurId
+	                        },
+	                        data: {
+	                            type: 'image/jpeg;base64',
+	                            image: base64Data
+	                        },
+	                        dataType: 'json'
+	                    }).success(function (response) {
+	                        console.log('success: ' + JSON.stringify(response));
+	                        actions_1.CardActions.addNewCardPost(text, response.data.link);
+	                        _this.resetFields(evt);
+	                    }).error(function (error) {
+	                        console.log('Could not reach api.imgur.com. Sorry :(' + JSON.stringify(error));
+	                    });
+	                });
+	            }
+	            else {
+	                console.log(" text card");
+	                actions_1.CardActions.addNewCardPost(text, null);
+	                _this.resetFields(evt);
+	            }
 	        };
 	    }
 	    InputCard.prototype.render = function () {
-	        return (React.createElement("div", {className: "general-card"}, React.createElement("input", {className: "input-card-text", placeholder: "status update", type: "text"}), React.createElement("br", null), React.createElement("input", {className: "input-card-image-url", placeholder: "image url", type: "text"}), React.createElement("br", null), React.createElement("button", {onClick: this.submitPost}, "Submit")));
+	        return (React.createElement("div", {className: "general-card"}, React.createElement("input", {className: "input-card-text", placeholder: "status update", type: "text"}), React.createElement("br", null), React.createElement("input", {id: "fileupload", className: "input-card-image", type: "file", name: "files[]"}), React.createElement("button", {type: "submit", onClick: this.submitPost}, "Submit")));
 	    };
 	    return InputCard;
 	}(React.Component));
