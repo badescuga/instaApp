@@ -19,7 +19,8 @@
     "typings": "*",
     "webpack": "*",
     "ts-loader": "*",
-    "source-map-loader": "*"
+    "source-map-loader": "*",
+    "guid":"*"
       },
   "devDependencies": {
     "source-map-loader": "^0.1.5",

@@ -16,6 +16,14 @@ class CardActionsStatic {
             id: _cardId
         });
     }
+
+    public addNewCardPost(text:string, imageUrl:string) {
+          AppDispatcher.dispatch({
+            actionType: CardActionID.ADD_NEW_CARD,
+            text: text,
+            imageUrl:imageUrl
+        });
+    }
 }
 
 var CardActions: CardActionsStatic = new CardActionsStatic();

@@ -25,6 +25,7 @@ export interface CardParams extends React.Props<any> {
     cardId: string;
     cardMedia: CardMedia;
     cardDetails: CardDetails;
+    createdAt: number;
 }
 
 export class Card extends React.Component<CardParams, {}> {

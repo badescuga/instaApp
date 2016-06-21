@@ -4,6 +4,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import {CardParams, Card} from './general-card';
+import {InputCard} from './input-card';
 import CardStore = require('./data/cardstore');
 
 interface TimelineProps {
@@ -44,11 +45,11 @@ export class Timeline extends React.Component<TimelineProps, TimelineState> {
     render() {
         return (
             <div>
-
+            <InputCard />
                 {
                     this.state.cards.map((item) => {
                         return (
-                            <Card key={item.cardId} cardId={item.cardId} cardType={item.cardType} cardDetails={item.cardDetails} cardMedia={item.cardMedia}/>
+                            <Card key={item.cardId} cardId={item.cardId} cardType={item.cardType} cardDetails={item.cardDetails} cardMedia={item.cardMedia} createdAt={item.createdAt}/>
                         );
                     })
                 }

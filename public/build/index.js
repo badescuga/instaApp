@@ -130,7 +130,8 @@
 	};
 	var React = __webpack_require__(1);
 	var general_card_1 = __webpack_require__(4);
-	var CardStore = __webpack_require__(12);
+	var input_card_1 = __webpack_require__(12);
+	var CardStore = __webpack_require__(13);
 	function getCardState() {
 	    return {
 	        cards: CardStore.getAll()
@@ -153,8 +154,8 @@
 	        this.state = getCardState();
 	    }
 	    Timeline.prototype.render = function () {
-	        return (React.createElement("div", null, this.state.cards.map(function (item) {
-	            return (React.createElement(general_card_1.Card, {key: item.cardId, cardId: item.cardId, cardType: item.cardType, cardDetails: item.cardDetails, cardMedia: item.cardMedia}));
+	        return (React.createElement("div", null, React.createElement(input_card_1.InputCard, null), this.state.cards.map(function (item) {
+	            return (React.createElement(general_card_1.Card, {key: item.cardId, cardId: item.cardId, cardType: item.cardType, cardDetails: item.cardDetails, cardMedia: item.cardMedia, createdAt: item.createdAt}));
 	        })));
 	    };
 	    return Timeline;
@@ -275,6 +276,13 @@
 	        dispatcher_1.AppDispatcher.dispatch({
 	            actionType: constants_1.CardActionID.TOGGLE_LIKE_STATUS,
 	            id: _cardId
+	        });
+	    };
+	    CardActionsStatic.prototype.addNewCardPost = function (text, imageUrl) {
+	        dispatcher_1.AppDispatcher.dispatch({
+	            actionType: constants_1.CardActionID.ADD_NEW_CARD,
+	            text: text,
+	            imageUrl: imageUrl
 	        });
 	    };
 	    return CardActionsStatic;
@@ -631,12 +639,44 @@
 	"use strict";
 	(function (CardActionID) {
 	    CardActionID[CardActionID["TOGGLE_LIKE_STATUS"] = 0] = "TOGGLE_LIKE_STATUS";
+	    CardActionID[CardActionID["ADD_NEW_CARD"] = 1] = "ADD_NEW_CARD";
 	})(exports.CardActionID || (exports.CardActionID = {}));
 	var CardActionID = exports.CardActionID;
 
 
 /***/ },
 /* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/// <reference path="../../typings/index.d.ts" />
+	var React = __webpack_require__(1);
+	var actions_1 = __webpack_require__(6);
+	var InputCard = (function (_super) {
+	    __extends(InputCard, _super);
+	    function InputCard(props) {
+	        _super.call(this, props);
+	        this.submitPost = function (evt) {
+	            var text = evt.target.parentNode.getElementsByClassName('input-card-text')[0].value;
+	            var imageUrl = evt.target.parentNode.getElementsByClassName('input-card-image-url')[0].value;
+	            actions_1.CardActions.addNewCardPost(text, imageUrl);
+	        };
+	    }
+	    InputCard.prototype.render = function () {
+	        return (React.createElement("div", {className: "general-card"}, React.createElement("input", {className: "input-card-text", placeholder: "status update", type: "text"}), React.createElement("br", null), React.createElement("input", {className: "input-card-image-url", placeholder: "image url", type: "text"}), React.createElement("br", null), React.createElement("button", {onClick: this.submitPost}, "Submit")));
+	    };
+	    return InputCard;
+	}(React.Component));
+	exports.InputCard = InputCard;
+
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	///<reference path='../../../typings/index.d.ts'/>
@@ -648,12 +688,13 @@
 	};
 	var dispatcher_1 = __webpack_require__(7);
 	var constants_1 = __webpack_require__(11);
-	var EventEmitter = __webpack_require__(13);
+	var EventEmitter = __webpack_require__(14);
 	var general_card_1 = __webpack_require__(4);
+	var Guid = __webpack_require__(15);
 	var CHANGE_EVENT = 'change';
 	var card1 = {
 	    cardType: general_card_1.CardType.Image,
-	    cardId: "card1234",
+	    cardId: "f54c2164-cc7b-de70-b7d5-d893f6338acb",
 	    cardDetails: {
 	        isLikedByMe: false,
 	        likeCount: 3
@@ -661,10 +702,11 @@
 	    cardMedia: {
 	        text: "some test text; badescuga",
 	        imageUrl: "http://img-9gag-fun.9cache.com/photo/a4j4BAw_700b_v1.jpg"
-	    }
+	    },
+	    createdAt: Date.now()
 	};
 	var card2 = {
-	    cardId: "card35335",
+	    cardId: "477f42c7-b216-c7f0-49a4-9d6e86ac282b",
 	    cardType: general_card_1.CardType.Text,
 	    cardDetails: {
 	        isLikedByMe: true,
@@ -672,7 +714,8 @@
 	    },
 	    cardMedia: {
 	        text: "some test 2 text"
-	    }
+	    },
+	    createdAt: Date.now()
 	};
 	var _cards = [card1, card2];
 	function getCardById(id) {
@@ -700,12 +743,37 @@
 	        card.cardDetails.likeCount = 0;
 	    }
 	}
+	function addNewCardPost(text, imageUrl) {
+	    var cardType = imageUrl ? general_card_1.CardType.Image : general_card_1.CardType.Text;
+	    var randId = Guid.raw();
+	    console.log('rand id is: ' + randId);
+	    var newCard = {
+	        cardId: randId,
+	        cardType: cardType,
+	        cardDetails: {
+	            isLikedByMe: false,
+	            likeCount: 0
+	        },
+	        cardMedia: {
+	            text: text,
+	            imageUrl: imageUrl
+	        },
+	        createdAt: Date.now()
+	    };
+	    _cards.push(newCard);
+	}
 	var CardStoreStatic = (function (_super) {
 	    __extends(CardStoreStatic, _super);
 	    function CardStoreStatic() {
 	        _super.apply(this, arguments);
 	    }
 	    CardStoreStatic.prototype.getAll = function () {
+	        _cards.sort(function (a, b) {
+	            if (a.createdAt < b.createdAt) {
+	                return 1;
+	            }
+	            return 0;
+	        });
 	        return _cards;
 	    };
 	    CardStoreStatic.prototype.emitChange = function () {
@@ -731,12 +799,13 @@
 	    var text;
 	    switch (action.actionType) {
 	        case constants_1.CardActionID.TOGGLE_LIKE_STATUS:
-	            //   text = action.text.trim();
-	            //   if (text !== '') {
-	            //      create(text);
-	            //   }
 	            console.log('in the dispatcher; calling toggle like status');
 	            toggleLikeStatus(action.id);
+	            CardStore.emitChange();
+	            break;
+	        case constants_1.CardActionID.ADD_NEW_CARD:
+	            console.log('in the dispatcher; calling add new card');
+	            addNewCardPost(action.text, action.imageUrl);
 	            CardStore.emitChange();
 	            break;
 	    }
@@ -745,7 +814,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1008,6 +1077,75 @@
 	// Expose the module.
 	//
 	module.exports = EventEmitter;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	(function () {
+	  var validator = new RegExp("^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$", "i");
+	
+	  function gen(count) {
+	    var out = "";
+	    for (var i=0; i<count; i++) {
+	      out += (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	    }
+	    return out;
+	  }
+	
+	  function Guid(guid) {
+	    if (!guid) throw new TypeError("Invalid argument; `value` has no value.");
+	      
+	    this.value = Guid.EMPTY;
+	    
+	    if (guid && guid instanceof Guid) {
+	      this.value = guid.toString();
+	
+	    } else if (guid && Object.prototype.toString.call(guid) === "[object String]" && Guid.isGuid(guid)) {
+	      this.value = guid;
+	    }
+	    
+	    this.equals = function(other) {
+	      // Comparing string `value` against provided `guid` will auto-call
+	      // toString on `guid` for comparison
+	      return Guid.isGuid(other) && this.value == other;
+	    };
+	
+	    this.isEmpty = function() {
+	      return this.value === Guid.EMPTY;
+	    };
+	    
+	    this.toString = function() {
+	      return this.value;
+	    };
+	    
+	    this.toJSON = function() {
+	      return this.value;
+	    };
+	  };
+	
+	  Guid.EMPTY = "00000000-0000-0000-0000-000000000000";
+	
+	  Guid.isGuid = function(value) {
+	    return value && (value instanceof Guid || validator.test(value.toString()));
+	  };
+	
+	  Guid.create = function() {
+	    return new Guid([gen(2), gen(1), gen(1), gen(1), gen(3)].join("-"));
+	  };
+	
+	  Guid.raw = function() {
+	    return [gen(2), gen(1), gen(1), gen(1), gen(3)].join("-");
+	  };
+	
+	  if(typeof module != 'undefined' && module.exports) {
+	    module.exports = Guid;
+	  }
+	  else if (typeof window != 'undefined') {
+	    window.Guid = Guid;
+	  }
+	})();
 
 
 /***/ }

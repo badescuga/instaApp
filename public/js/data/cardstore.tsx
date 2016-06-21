@@ -5,12 +5,13 @@ import { CardActionID } from './constants';
 import assign = require('object-assign');
 import EventEmitter = require('eventemitter3');
 import {CardParams, CardType} from '../general-card';
+var Guid = require('guid');
 
 var CHANGE_EVENT = 'change';
 
 var card1: CardParams = {
     cardType: CardType.Image,
-    cardId: "card1234",
+    cardId: "f54c2164-cc7b-de70-b7d5-d893f6338acb",
     cardDetails: {
         isLikedByMe: false,
         likeCount: 3
@@ -18,11 +19,13 @@ var card1: CardParams = {
     cardMedia: {
         text: "some test text; badescuga",
         imageUrl: "http://img-9gag-fun.9cache.com/photo/a4j4BAw_700b_v1.jpg"
-    }
+    },
+    createdAt: Date.now()
+
 };
 
 var card2: CardParams = {
-    cardId: "card35335",
+    cardId: "477f42c7-b216-c7f0-49a4-9d6e86ac282b",
     cardType: CardType.Text,
     cardDetails: {
         isLikedByMe: true,
@@ -30,7 +33,8 @@ var card2: CardParams = {
     },
     cardMedia: {
         text: "some test 2 text"
-    }
+    },
+    createdAt: Date.now()
 };
 
 var _cards: CardParams[] = [card1, card2];
@@ -47,7 +51,7 @@ function getCardById(id: string): CardParams {
 }
 
 function toggleLikeStatus(cardId: string) {
-    console.log("searching to toggle card with id:"+cardId);
+    console.log("searching to toggle card with id:" + cardId);
     var card = getCardById(cardId);
     if (card === null) {
         console.log(`card with Id ${cardId} could not be found; can't toggle like button`)
@@ -66,10 +70,38 @@ function toggleLikeStatus(cardId: string) {
     }
 }
 
+function addNewCardPost(text: string, imageUrl: string) {
+
+    var cardType = imageUrl ? CardType.Image : CardType.Text;
+    var randId = Guid.raw();
+    console.log('rand id is: ' + randId);
+    var newCard: CardParams = {
+        cardId: randId,
+        cardType: cardType,
+        cardDetails: {
+            isLikedByMe: false,
+            likeCount: 0
+        },
+        cardMedia: {
+            text: text,
+            imageUrl: imageUrl
+        },
+        createdAt: Date.now()
+    }
+
+    _cards.push(newCard);
+}
+
 class CardStoreStatic extends EventEmitter {
 
 
     public getAll() {
+        _cards.sort((a, b) => {
+            if (a.createdAt < b.createdAt) {
+                return 1;
+            }
+            return 0;
+        });
         return _cards;
     }
 
@@ -101,16 +133,18 @@ AppDispatcher.register(function (action: CardAction): void {
 
     switch (action.actionType) {
         case CardActionID.TOGGLE_LIKE_STATUS:
-            //   text = action.text.trim();
-            //   if (text !== '') {
-            //      create(text);
-            //   }
             console.log('in the dispatcher; calling toggle like status');
             toggleLikeStatus(action.id);
 
             CardStore.emitChange();
             break;
 
+        case CardActionID.ADD_NEW_CARD:
+            console.log('in the dispatcher; calling add new card');
+            addNewCardPost(action.text, action.imageUrl);
+
+            CardStore.emitChange();
+            break;
     }
 });
 
