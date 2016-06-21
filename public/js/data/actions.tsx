@@ -1,6 +1,6 @@
 ///<reference path='./cardstore.tsx'/>
 
-import AppDispatcher = require('./dispatcher');
+import { AppDispatcher } from './dispatcher';
 import { CardActionID } from './constants';
 
 
@@ -10,14 +10,14 @@ class CardActionsStatic {
     public CardActionID = CardActionID;
 
 
-    public toggleLikeButton(cardId: number) {
+    public toggleLikeButton(_cardId: string) {
         AppDispatcher.dispatch({
             actionType: CardActionID.TOGGLE_LIKE_STATUS,
-            cardId: cardId
+            id: _cardId
         });
     }
 }
 
 var CardActions: CardActionsStatic = new CardActionsStatic();
 
-export = CardActions;
+export {CardActions};

@@ -1,6 +1,7 @@
 /// <reference path="../../typings/index.d.ts" />
 import * as React from "react";
 import { CardLikeButton } from "./buttons";
+import {CardActions} from './data/actions';
 
 export enum CardType {
     None = 0,
@@ -26,9 +27,9 @@ export interface CardParams extends React.Props<any> {
     cardDetails: CardDetails;
 }
 
-export class Card extends React.Component<CardParams, CardDetails> {
+export class Card extends React.Component<CardParams, {}> {
 
-    state: CardDetails;
+   // state: CardDetails;
 
     constructor(props: CardParams) {
         super(props);
@@ -44,21 +45,21 @@ export class Card extends React.Component<CardParams, CardDetails> {
     }
 
     componentWillMount() {
-        this.setState({
-            isLikedByMe: this.props.cardDetails.isLikedByMe,
-            likeCount: this.props.cardDetails.likeCount
-        });
+        // this.setState({
+        //     isLikedByMe: this.props.cardDetails.isLikedByMe,
+        //     likeCount: this.props.cardDetails.likeCount
+        // });
     }
 
     componentWillReceiveProps(nextProps: CardParams) {
-        this.setState({
-            isLikedByMe: nextProps.cardDetails.isLikedByMe,
-            likeCount: nextProps.cardDetails.likeCount
-        });
+        // this.setState({
+        //     isLikedByMe: nextProps.cardDetails.isLikedByMe,
+        //     likeCount: nextProps.cardDetails.likeCount
+        // });
     }
 
     render() {
-        console.log("RENDERING CARD");
+        console.log("RENDERING CARD "+this.props.cardId);
         // console.dir(this.props.cardDetails);
         // console.dir(this.props.cardMedia);
         // console.dir(this.props.cardType);
@@ -68,8 +69,8 @@ export class Card extends React.Component<CardParams, CardDetails> {
                 <div className="general-card">
                     <p>Text card.ID: {this.props.cardId}</p>
                     <p>{this.props.cardMedia.text}</p>
-                    <CardLikeButton onButClick={this.likeButtonClicked} buttonText={this.state.isLikedByMe ? "Liked" : "Like"} isPressed={this.state.isLikedByMe}/>
-                    <p>Like count: {this.state.likeCount}</p>
+                    <CardLikeButton cardId={this.props.cardId} buttonText={this.props.cardDetails.isLikedByMe ? "Liked" : "Like"} isPressed={this.props.cardDetails.isLikedByMe}/>
+                    <p>Like count: {this.props.cardDetails.likeCount}</p>
                 </div>
             );
         } else { //photo card
@@ -79,30 +80,12 @@ export class Card extends React.Component<CardParams, CardDetails> {
                     <p> {this.props.cardMedia.text} </p>
                     <img src={this.props.cardMedia.imageUrl} />
                     <br/>
-                    <CardLikeButton onButClick={this.likeButtonClicked} buttonText={this.state.isLikedByMe ? "Liked" : "Like"} isPressed={this.state.isLikedByMe}/>
-                    <p>Like count: {this.state.likeCount}</p>
+                    <CardLikeButton cardId={this.props.cardId} buttonText={this.props.cardDetails.isLikedByMe ? "Liked" : "Like"} isPressed={this.props.cardDetails.isLikedByMe}/>
+                    <p>Like count: {this.props.cardDetails.likeCount}</p>
 
                 </div>
             );
         }
-    }
-
-    likeButtonClicked = () => {
-        console.log('in card => like button clicked!');
-        var _isLikedByMe = this.state.isLikedByMe;
-        var _likeCount = this.state.likeCount;
-
-        if (_isLikedByMe) {
-            _likeCount--;
-        } else {
-            _likeCount++;
-        }
-        _isLikedByMe = !_isLikedByMe;
-
-        this.setState({
-            isLikedByMe: _isLikedByMe,
-            likeCount: _likeCount
-        })
     }
 }
 

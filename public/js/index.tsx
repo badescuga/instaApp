@@ -4,47 +4,39 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import {Card} from "./card";
-
+import {Timeline} from "./timeline";
 import {CardParams, CardType, CardMedia, CardDetails} from "./card";
 
-var card1: CardParams = {
-    cardType: CardType.Image,
-    cardId: "card1234",
-    cardDetails: {
-        isLikedByMe: false,
-        likeCount: 3
-    },
-    cardMedia: {
-        text: "some test text; badescuga",
-        imageUrl: "http://img-9gag-fun.9cache.com/photo/a4j4BAw_700b_v1.jpg"
-    }
-};
+// var card1: CardParams = {
+//     cardType: CardType.Image,
+//     cardId: "card1234",
+//     cardDetails: {
+//         isLikedByMe: false,
+//         likeCount: 3
+//     },
+//     cardMedia: {
+//         text: "some test text; badescuga",
+//         imageUrl: "http://img-9gag-fun.9cache.com/photo/a4j4BAw_700b_v1.jpg"
+//     }
+// };
 
-var card2: CardParams = {
-    cardId: "card35335",
-    cardType: CardType.Text,
-    cardDetails: {
-        isLikedByMe: true,
-        likeCount: 1
-    },
-    cardMedia: {
-        text: "some test 2 text"
-    }
-};
+// var card2: CardParams = {
+//     cardId: "card35335",
+//     cardType: CardType.Text,
+//     cardDetails: {
+//         isLikedByMe: true,
+//         likeCount: 1
+//     },
+//     cardMedia: {
+//         text: "some test 2 text"
+//     }
+// };
 
-var cards = [card1, card2];
+// var cards = [card1, card2];
 
 ReactDOM.render(
-    <div>
-
-        {
-            cards.map((item) => {
-                return (
-                    <Card key={item.cardId} cardId={item.cardId} cardType={item.cardType} cardDetails={item.cardDetails} cardMedia={item.cardMedia}/>
-                );
-            })
-        }
-    </div>,
+    <Timeline />
+    ,
     document.getElementById("mainContainer")
 );
 //================================================

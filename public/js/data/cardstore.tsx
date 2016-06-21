@@ -36,7 +36,6 @@ var card2: CardParams = {
 var _cards: CardParams[] = [card1, card2];
 
 function getCardById(id: string): CardParams {
-    var card = null;
 
     for (var i = 0; i < _cards.length; i++) {
         if (_cards[i].cardId === id) {
@@ -48,8 +47,9 @@ function getCardById(id: string): CardParams {
 }
 
 function toggleLikeStatus(cardId: string) {
+    console.log("searching to toggle card with id:"+cardId);
     var card = getCardById(cardId);
-    if (card == null) {
+    if (card === null) {
         console.log(`card with Id ${cardId} could not be found; can't toggle like button`)
     }
 
@@ -105,6 +105,7 @@ AppDispatcher.register(function (action: CardAction): void {
             //   if (text !== '') {
             //      create(text);
             //   }
+            console.log('in the dispatcher; calling toggle like status');
             toggleLikeStatus(action.id);
 
             CardStore.emitChange();
@@ -113,3 +114,4 @@ AppDispatcher.register(function (action: CardAction): void {
     }
 });
 
+export = CardStore;
