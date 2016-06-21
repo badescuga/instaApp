@@ -77,6 +77,36 @@
 	ReactDOM.render(React.createElement("div", null, cards.map(function (item) {
 	    return (React.createElement(card_1.Card, {key: item.cardId, cardId: item.cardId, cardType: item.cardType, cardDetails: item.cardDetails, cardMedia: item.cardMedia}));
 	})), document.getElementById("mainContainer"));
+	//================================================
+	function getCardById(id) {
+	    for (var i = 0; i < cards.length; i++) {
+	        console.dir(cards[i].cardId);
+	        if (cards[i].cardId === id) {
+	            console.log("found card! ");
+	            return cards[i];
+	        }
+	    }
+	    return null;
+	}
+	function toggleLikeStatus(cardId) {
+	    var card = getCardById(cardId);
+	    console.dir(card);
+	    if (card) {
+	        console.log("card with Id " + cardId + " could not be found; can't toggle like button");
+	    }
+	    card.cardDetails.isLikedByMe = !card.cardDetails.isLikedByMe; // toggle the like button
+	    if (card.cardDetails.isLikedByMe) {
+	        card.cardDetails.likeCount++;
+	    }
+	    else {
+	        card.cardDetails.likeCount--;
+	    }
+	    if (card.cardDetails.likeCount < 0) {
+	        card.cardDetails.likeCount = 0;
+	    }
+	}
+	toggleLikeStatus("card1234");
+	console.dir(cards);
 
 
 /***/ },

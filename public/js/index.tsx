@@ -47,3 +47,41 @@ ReactDOM.render(
     </div>,
     document.getElementById("mainContainer")
 );
+//================================================
+
+// function getCardById(id: string): CardParams {
+
+//     for (var i = 0; i < cards.length; i++) {
+
+//         console.dir(cards[i].cardId);
+//         if (cards[i].cardId === id) {
+//             console.log("found card! ");
+//             return cards[i];
+//         }
+//     }
+
+//     return null;
+// }
+
+// function toggleLikeStatus(cardId: string) {
+//     var card = getCardById(cardId);
+//     console.dir(card);
+//     if (card) {
+//         console.log(`card with Id ${cardId} could not be found; can't toggle like button`)
+//     }
+
+//     card.cardDetails.isLikedByMe = !card.cardDetails.isLikedByMe; // toggle the like button
+
+//     if (card.cardDetails.isLikedByMe) {
+//         card.cardDetails.likeCount++;
+//     } else {
+//         card.cardDetails.likeCount--;
+//     }
+
+//     if (card.cardDetails.likeCount < 0) {//make sure like count is >= 0
+//         card.cardDetails.likeCount = 0;
+//     }
+// }
+
+// toggleLikeStatus("card1234");
+// console.dir(cards);
